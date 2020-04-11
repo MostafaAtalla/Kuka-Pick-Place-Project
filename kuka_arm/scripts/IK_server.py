@@ -63,8 +63,12 @@ def handle_calculate_IK(req):
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
 
             ### Your IK code here
-	    # Compensate for rotation discrepancy between DH parameters and Gazebo
-	    #
+	    # Calculate the wrist center position vector
+	    directional_vector = Matrix([1,0,0])   # directional vector from gripper frame origin to the wrist center
+
+        p_gripper = Matrix([px,py,pz])         # gripper frame origin position vector
+
+        p_wc = p_gripper - 0.303*directional_vector  # wrist center position vector
 	    #
 	    # Calculate joint angles using Geometric IK method
 	    #
