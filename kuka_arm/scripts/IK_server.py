@@ -20,23 +20,7 @@ from sympy import *
 from FK import *
 
 
-def initialization():
-    # Initialize the symbolic variables
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
-    # Create Modified DH parameters dictionary
-    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
-              'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
-              'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
-              'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
-    # Define the correction transformation between the gripper DH frame and gripper URDF frame
-    Tdh_urdf = Matrix([[0,  0,   1,  0],
-                       [0, -1,   0,  0],
-                       [1,  0,   0,  0],
-                       [0,  0,   0,  1]])
 
-    # Call forward kinematics function from the FK module imported above
-    T0_gripper,T0_frame,transforms = forward_kinematics(DH,Tdh_urdf)
-    return (T0_gripper,T0_frame,transforms)
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
@@ -68,6 +52,9 @@ def handle_calculate_IK(req):
             # Assemble the homogenous transformation matrix corresponding to the pose
             T_gripper[:3,3] = Matrix([px,py,pz])
 
+            R_gripper = T_gripper[:3,:3]
+
+            R_gripper_corrected = Rgripper * (Tdh_urdf.inv(method="LU")) 
 
                 ### Your IK code here
             # Calculate the wrist center position vector
@@ -94,7 +81,15 @@ def handle_calculate_IK(req):
             theta3 = pi/2 - (angle_b+0.036)
 
             # Calculate the inverse Orientation Solution
-            
+            # Calculating R0_3
+            R0_3 = HT[0]*HT[1]*HT[2]
+            R0_3 = R0_3.evalf(subs={q1:theta1,q2:theta2,q3:theta3})
+            # Caculating R3_6
+            R3_6 = R0_3.transpose()*R_gripper_corrected
+
+            theta4 = atan2(R3_6[2,2], -R3_6[0,2])
+            theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]), R3_6[1,2])
+            theta6 = atan2(-R3_6[1,1], R3_6[1,0])
                 ###
 
                 # Populate response for the IK request
@@ -109,12 +104,28 @@ def handle_calculate_IK(req):
 def IK_server():
     # initialize node
     rospy.init_node('IK_server')
-    # calculate the forward kinematics
-    T0_gripper,T0_frame,transforms = initialization()
     # declare IK service
     s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
     print("Ready to receive an IK request")
     rospy.spin()
 
 if __name__ == "__main__":
+    #initialization
+    # Initialize the symbolic variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
+    # Create Modified DH parameters dictionary
+    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
+              'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
+              'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
+              'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
+    # Define the correction transformation between the gripper DH frame and gripper URDF frame
+    Tdh_urdf = Matrix([[0,  0,   1,  0],
+                       [0, -1,   0,  0],
+                       [1,  0,   0,  0],
+                       [0,  0,   0,  1]])
+
+    # Call forward kinematics function from the FK module imported above
+    HT = forward_kinematics(DH)
+    
+    # Call IK_server function
     IK_server()
