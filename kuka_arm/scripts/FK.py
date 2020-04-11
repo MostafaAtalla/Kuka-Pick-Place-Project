@@ -41,7 +41,7 @@ T0_gripper = transforms[0]   # Transformation matrix from the URDF gripper frame
 
 for i in range(1,len(transforms)):
     T0_gripper = T0_gripper*transforms[i]     # Accumulating the transformations
-    T0_frame.append(T0_gripper)                # Appending the transformations from each frame to the base
+    T0_frame.append(T0_gripper)               # Appending the transformations from each frame to the base
 
 
 compute_T0_gripper= T0_gripper.evalf(subs={q1:0,q2:0,q3:0,q4:0,q5:0,q6:0})
