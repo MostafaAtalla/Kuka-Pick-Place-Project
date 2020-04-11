@@ -17,7 +17,15 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
 from mpmath import *
 from sympy import *
+from FK import *
 
+
+def initialization():
+# Create Modified DH parameters dictionary
+    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
+              'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
+              'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
+              'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
