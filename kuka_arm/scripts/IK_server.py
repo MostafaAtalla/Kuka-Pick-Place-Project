@@ -12,7 +12,7 @@
 # import modules
 import rospy
 import tf
-from kuka_arm.srv import *
+#from kuka_arm.srv import *
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
 from mpmath import *
@@ -81,10 +81,13 @@ def handle_calculate_IK(req):
 
 
 def IK_server():
-    # initialize node and declare calculate_ik service
+    # initialize node
     rospy.init_node('IK_server')
+    # calculate the forward kinematics
+    T0_gripper,T0_frame,transforms = initialization()
+    # declare IK service
     s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
-    print "Ready to receive an IK request"
+    print("Ready to receive an IK request")
     rospy.spin()
 
 if __name__ == "__main__":
