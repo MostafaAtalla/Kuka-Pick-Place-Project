@@ -21,11 +21,20 @@ from FK import *
 
 
 def initialization():
-# Create Modified DH parameters dictionary
+    # Initialize the symbolic variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
+    # Create Modified DH parameters dictionary
     DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
               'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
               'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
               'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
+    # Define the correction transformation between the gripper DH frame and gripper URDF frame
+    Tdh_urdf = Matrix([[0,  0,   1,  0],
+                       [0, -1,   0,  0],
+                       [1,  0,   0,  0],
+                       [0,  0,   0,  1]])
+
+    # Call FK function from the FK module imported above
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))
