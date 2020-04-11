@@ -2,7 +2,6 @@
 from sympy import *
 
 # Initialization
-num_of_transforms = 7     #Number of transforms from base to gripper
 q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')        #Initialize the symbolic variables 
 
 # Create Modified DH parameters dictionary
@@ -11,6 +10,7 @@ DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
       'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
       'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
 
+num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
 transforms = []    #transforms list to accumulate the transforms from each joint to the following one.
 # Create the DH frames transformations iteratively from joint 1 to joint 6
 for i in range(num_of_transforms):
@@ -27,22 +27,25 @@ for i in range(num_of_transforms):
                               [0, 0, 0, 1]]))
 
 # Create the gripper frame correction matrix to align the DH frames with the URDF Frames
-Tcorr = Matrix([[0,  0,   1,  0],
-                [0, -1,   0,  0],
-                [1,  0,   0,  0],
-                [0,  0,   0,  1]])
+# The rotation matrix of this transformations is the unit vectors of the URDF gripper frame
+# With respect to the DH gripper frame. The translation component is zero
+transforms.append(Matrix([[0,  0,   1,  0],
+                         [0, -1,   0,  0],
+                         [1,  0,   0,  0],
+                         [0,  0,   0,  1]]))
 
-T0_transforms= [transforms[0]]
-T0_g = transforms[0]
+# Create the total transforms from each frame to the base frame
+T0_frame= [transforms[0]]    # Transformations list from each frame to the base sequentially
 
-for i in range(1,num_of_transforms):
-    T0_g = T0_g*transforms[i]
-    T0_transforms.append(T0_g)
+T0_gripper = transforms[0]   # Transformation matrix from the URDF gripper frame to the base frame
 
-Tgripper = T0_g*Tcorr
-#print(simplify(T0_6))
-compute_Tgripper= Tgripper.evalf(subs={q1:0,q2:0,q3:0,q4:0,q5:0,q6:0})
+for i in range(1,len(transforms)):
+    T0_gripper = T0_gripper*transforms[i]     # Accumulating the transformations
+    T0_frame.append(T0_gripper)                # Appending the transformations from each frame to the base
 
-print(compute_Tgripper)
+
+compute_T0_gripper= T0_gripper.evalf(subs={q1:0,q2:0,q3:0,q4:0,q5:0,q6:0})
+
+print(compute_T0_gripper)
 
 
