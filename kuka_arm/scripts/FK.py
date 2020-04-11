@@ -16,7 +16,7 @@ Dependacies: Sympy
 '''
 from sympy import *
 
-def forward_kinematics(DH,Tdhg_urdfg):
+def forward_kinematics(DH):
     # Initialization
     num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
     
@@ -39,18 +39,19 @@ def forward_kinematics(DH,Tdhg_urdfg):
     # Create the gripper frame correction matrix to align the DH frames with the URDF Frames
     # The rotation matrix of this transformations is the unit vectors of the URDF gripper frame
     # With respect to the DH gripper frame. The translation component is zero
-    transforms.append(Tdhg_urdfg)
+    # transforms.append(Tdhg_urdfg)
 
     # Create the total transforms from each frame to the base frame
     T0_frame= [transforms[0]]    # Transformations list from each frame to the base sequentially
 
     T0_gripper = transforms[0]   # Transformation matrix from the URDF gripper frame to the base frame
-
+'''
     for i in range(1,len(transforms)):
         T0_gripper = T0_gripper*transforms[i]     # Accumulating the transformations
         T0_frame.append(T0_gripper)               # Appending the transformations from each frame to the base
-
-    return (T0_gripper,T0_frame,transforms)
+T0_gripper,T0_frame,
+'''
+    return (transforms)
 
 
 
