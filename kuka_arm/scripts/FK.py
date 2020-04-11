@@ -14,7 +14,7 @@ It produces the following outputs:
 
 Dependacies: Sympy
 '''
-def FK(DH,Tdhg_urdfg):
+def forward_kinematics(DH,Tdhg_urdfg):
     # Initialization
     num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
     
