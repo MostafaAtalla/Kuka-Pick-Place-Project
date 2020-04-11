@@ -11,11 +11,11 @@ It produces the following outputs:
 1. Sympy transformation matrix from the base to the gripper frame 
 2. List of Sympy transformation matrices from base to gripper frame w.r.t. the base frame
 3. List of Sympy transformation matrices from base to gripper frame each w.r.t. the prior frame
+
+Dependacies: Sympy
 '''
 def FK(DH,Tdhg_urdfg):
     # Initialization
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')        #Initialize the symbolic variables 
-
     num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
     
     transforms = []    #transforms list to accumulate the transforms from each joint to the following one.
@@ -37,10 +37,7 @@ def FK(DH,Tdhg_urdfg):
     # Create the gripper frame correction matrix to align the DH frames with the URDF Frames
     # The rotation matrix of this transformations is the unit vectors of the URDF gripper frame
     # With respect to the DH gripper frame. The translation component is zero
-    transforms.append(Matrix([[0,  0,   1,  0],
-                             [0, -1,   0,  0],
-                             [1,  0,   0,  0],
-                             [0,  0,   0,  1]]))
+    transforms.append(Tdhg_urdfg)
 
     # Create the total transforms from each frame to the base frame
     T0_frame= [transforms[0]]    # Transformations list from each frame to the base sequentially
