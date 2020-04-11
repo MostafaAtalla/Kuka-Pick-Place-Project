@@ -1,6 +1,17 @@
-#!/usr/bin/env python
-from sympy import *
+'''
+This function takes the following inputs:
+1. DH table dictionary containing the following key-values pairs:
+Key: 'a'     (link length)   - Value: list of link lengths
+Key: 'alpha' (link twist)    - Value: list of link twist angles in radians
+Key: 'd'     (joint offset)  - Value: list of joint offsets 
+Key: 'q'     (joint angles)  - Value: list of joint angles 
+2. Transformation matrix between the DH gripper frame and the URDF gripper frame
 
+It produces the following outputs:
+1. Sympy transformation matrix from the base to the gripper frame 
+2. List of Sympy transformation matrices from base to gripper frame w.r.t. the base frame
+3. List of Sympy transformation matrices from base to gripper frame each w.r.t. the prior frame
+'''
 def FK(DH):
     # Initialization
     q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')        #Initialize the symbolic variables 
