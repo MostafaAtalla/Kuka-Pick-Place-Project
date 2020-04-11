@@ -12,7 +12,7 @@
 # import modules
 import rospy
 import tf
-#from kuka_arm.srv import *
+from kuka_arm.srv import *
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
 from mpmath import *
@@ -54,7 +54,7 @@ def handle_calculate_IK(req):
 
             R_gripper = T_gripper[:3,:3]
 
-            R_gripper_corrected = Rgripper * (Tdh_urdf.inv(method="LU")) 
+            R_gripper_corrected = R_gripper * (Tdh_urdf[:3,:3].transpose()) 
 
                 ### Your IK code here
             # Calculate the wrist center position vector
@@ -82,7 +82,7 @@ def handle_calculate_IK(req):
 
             # Calculate the inverse Orientation Solution
             # Calculating R0_3
-            R0_3 = HT[0]*HT[1]*HT[2]
+            R0_3 = HT[0][:3,:3]*HT[1][:3,:3]*HT[2][:3,:3]
             R0_3 = R0_3.evalf(subs={q1:theta1,q2:theta2,q3:theta3})
             # Caculating R3_6
             R3_6 = R0_3.transpose()*R_gripper_corrected

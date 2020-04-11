@@ -45,13 +45,13 @@ def forward_kinematics(DH):
     T0_frame= [transforms[0]]    # Transformations list from each frame to the base sequentially
 
     T0_gripper = transforms[0]   # Transformation matrix from the URDF gripper frame to the base frame
-'''
-    for i in range(1,len(transforms)):
-        T0_gripper = T0_gripper*transforms[i]     # Accumulating the transformations
-        T0_frame.append(T0_gripper)               # Appending the transformations from each frame to the base
-T0_gripper,T0_frame,
-'''
-    return (transforms)
+    '''
+        for i in range(1,len(transforms)):
+            T0_gripper = T0_gripper*transforms[i]     # Accumulating the transformations
+            T0_frame.append(T0_gripper)               # Appending the transformations from each frame to the base
+    T0_gripper,T0_frame,
+    '''
+    return transforms
 
 
 
