@@ -53,7 +53,7 @@ def handle_calculate_IK(req):
 
         transforms.append(Matrix([[cos(q),             -sin(q),                    0,                    a],
                                   [sin(q)*cos(alpha),  cos(q)*cos(alpha),    -sin(alpha),    -sin(alpha)*d],
-                                  [sin(q)*sin(alpha),  cos(q)*sin(alpha),      cos(alpha),     cos(alpha)*d],
+                                  [sin(q)*sin(alpha),  cos(q)*sin(alpha),      cos(alpha),     cos(alpha)*d],c
                                   [0,                     0,                      0,                     1]])
 	#
 	# Create individual transformation matrices
