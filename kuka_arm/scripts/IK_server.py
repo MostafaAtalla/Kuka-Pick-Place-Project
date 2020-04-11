@@ -34,7 +34,9 @@ def initialization():
                        [1,  0,   0,  0],
                        [0,  0,   0,  1]])
 
-    # Call FK function from the FK module imported above
+    # Call forward kinematics function from the FK module imported above
+    T0_gripper,T0_frame,transforms = forward_kinematics(DH,Tdh_urdf)
+    return (T0_gripper,T0_frame,transforms)
 
 def handle_calculate_IK(req):
     rospy.loginfo("Received %s eef-poses from the plan" % len(req.poses))

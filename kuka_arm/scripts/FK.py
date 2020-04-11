@@ -25,7 +25,7 @@ def forward_kinematics(DH,Tdhg_urdfg):
         # Extracting the Dh paramters of the corresponding frame from the Dh dictionary
         alpha = DH['alpha'][i]     #link twist
         a = DH['a'][i]             #link length
-        d = DH['d'][i]             #joint  
+        d = DH['d'][i]             #joint offset
         q = DH['q'][i]             #joint angle
 
         # Create the frame transformation matrix relative to the previous frame and append it the transforms list
