@@ -12,7 +12,7 @@ It produces the following outputs:
 2. List of Sympy transformation matrices from base to gripper frame w.r.t. the base frame
 3. List of Sympy transformation matrices from base to gripper frame each w.r.t. the prior frame
 '''
-def FK(DH):
+def FK(DH,Tdhg_urdfg):
     # Initialization
     q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')        #Initialize the symbolic variables 
 
