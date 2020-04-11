@@ -69,10 +69,26 @@ def handle_calculate_IK(req):
         p_gripper = Matrix([px,py,pz])         # gripper frame origin position vector
 
         p_wc = p_gripper - 0.303*directional_vector  # wrist center position vector
-	    #
+	    
 	    # Calculate joint angles using Geometric IK method
-	    #
-	    #
+
+        # Calculate the inverse position solution
+	    # calculate first joint angle
+        theta1 = atan2(p_wc[1],p_wc[0])
+        # calculate second joint angle
+        a = 1.501
+        b = ((((p_wc[0]**2+p_wc[1]**2)**0.5) - 0.35)**2 + (p_wc[2]-0.75)**2)**0.5
+        c = 1.25
+
+        angle_a = acos((b**2+c**2-a**2)/(2*b*c))
+
+        angle_b = acos((a**2+c**2-b**2)/(2*a*c))
+
+        theta2 = pi/2 - angle_a - atan2(p_wc[2]-0.75,((p_wc[0]**2+p_wc[1]**2)**0.5)-0.35) 
+	    # calculate third joint angle
+        theta3 = pi/2 - (angle_b+0.036)
+
+        
             ###
 
             # Populate response for the IK request
