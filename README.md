@@ -40,7 +40,7 @@ It is worth noting that the final girpper DH frame does not necessarily coincide
 
 
 ![alt text][image1]
-![alt text][image2]
+
 Using the constructed DH frames, the DH parameters table below is obtained.
 
 Links | alpha(i-1) | a(i-1) | d(i) | theta(i)
@@ -53,9 +53,16 @@ Links | alpha(i-1) | a(i-1) | d(i) | theta(i)
 5->6 | -pi/2 | 0 | 0 | q6
 6->g | 0 | 0 | dg | 0
 
+The constant DH parameters are obtained from the URDF file of the Kuka KR210 to be as follows:
+d1 = 0.33 + 0.42 = 0.75
+a2 = 0.35
+a3 = 1.25
+a4 = -0.054   d4 = 0.96 + 0.54 = 1.5
+dg = 0.11+0.193 = 0.303
 
+For better understanding of what those parameters are on the physical robot, please refer to the image below where each parameter is shown on the robot schematic.
 
-
+![alt text][image2]
 
 
 
