@@ -67,22 +67,8 @@ def IK_server():
     rospy.spin()
 
 if __name__ == "__main__":
-    #initialization
-    # Initialize the symbolic variables
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
-    # Create Modified DH parameters dictionary
-    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
-              'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
-              'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
-              'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
-    # Define the correction transformation between the gripper DH frame and gripper URDF frame
-    Tdh_urdf = Matrix([[0,  0,   1,  0],
-                       [0, -1,   0,  0],
-                       [1,  0,   0,  0],
-                       [0,  0,   0,  1]])
-
     # Call forward kinematics function from the FK module imported above
-    HT = forward_kinematics(DH)
+    transforms = forward_kinematics(DH)
     
     # Call IK_server function
     IK_server()

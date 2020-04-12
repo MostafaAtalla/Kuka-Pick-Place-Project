@@ -70,6 +70,9 @@ def forward_kinematics():
 def debug(q,t,quat):
 
     ######## Calculate Pose Using Function Herein ############
+    # Initialize the symbolic variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') 
+
     # Call forward kinematics function
     transforms = forward_kinematics()
             
@@ -84,12 +87,12 @@ def debug(q,t,quat):
     # Enter Joint Values set in Joint State Publisher
 
     values={}
-    values[q1] = -2.91
-    values[q2] = -0.78
-    values[q3] =  0.25
-    values[q4] =  5.19
-    values[q5] =  0.36
-    values[q6] =  3.57
+    values[q1] = q[0]
+    values[q2] = q[1]
+    values[q3] = q[2]
+    values[q4] = q[3]
+    values[q5] = q[4]
+    values[q6] = q[5]
 
     T0_gripper = T0_gripper.evalf(subs=values)
 
@@ -114,8 +117,8 @@ def debug(q,t,quat):
     pprint(T0_gripper_actual-T0_gripper)
 
 '''
-To use the debugging function to test the forward kinematics function
-uncomment this test section and enter the q, t and quat values
+# To use the debugging function to test the forward kinematics function
+# uncomment this test section and enter the q, t and quat values
 # Debugging Function Inputs
 q = [-2.91,-0.78,0.25,5.19,0.36,3.57]         # list of joint values in radians
 

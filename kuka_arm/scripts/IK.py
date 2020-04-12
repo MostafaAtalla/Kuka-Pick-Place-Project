@@ -5,7 +5,7 @@ It takes the pose parameters as an input, returns the corresponding joint values
 import tf
 from sympy import *
 
-def inverse_kinematics(px,py,pz,roll,pitch,yaw):
+def inverse_kinematics(px,py,pz,roll,pitch,yaw,transforms):
     # Assemble a Rotation matrix corresponding to those euler angles   
     T_gripper = tf.transformations.euler_matrix(roll,pitch,yaw)
     # Cast the rotation matrix to be sympy rotation matrix
