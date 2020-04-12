@@ -1,5 +1,7 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
+[//]: # (Image References)
+[image1]: ./misc_images/kuka_DH_diagram.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -26,10 +28,17 @@ In this write up, a complete report about the project is presented with details 
 
 ## Kinematic Analysis
 ### DH Frames Assignment 
-The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. 
+The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. The general procedure for asigning frames is to:
+- Assign Z axes to the joints's axis of rotation
+- Assign X axes to the common normal between Zi-1 and Zi
+- Construct Y in accordance with the right hand rule
+- For the first frame, make Z1 identical to Z0
+- For the gripper frame assign Z and X similar to Z6 and X6 respectively
 
-[//]: # (Image References)
-[image1]: ./misc_images/kuka_DH_diagram.png
+It is worth noting that the final girpper DH frame does not necessarly coincide with the gripper URDF frame ( which is the case here). In this case, a transformation is needed between both frames to make sure that the pose calculations is accurate.
+
+
+
 
 ![alt text][image1]
 
