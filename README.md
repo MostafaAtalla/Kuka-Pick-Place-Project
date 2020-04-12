@@ -12,9 +12,33 @@ In this project, a KuKa KR210 is simulated in Gazebo simulation environement is 
 
 The main task required in this project is to correctly solve the forward and inverse kinematics problems of the arm and code it up in an IK ROS service. This service works in a request-response basis where other nodes might request the inverse kinematics solution for a specific trajectory points and the service will respond with the IK solution accordingly. 
 
-In this write up, a complete report about the project is presented with details about the kinematic analysis and the project implementation. 
+In this write up, a complete report about the project is presented with details about the kinematic analysis and the project implementation. The steps taken to complete this project are:
+1 - Solve the forward kinematics problem by:
+- Properly set the DH frames and construct the DH paramters table
+- Extract the DH constant parameters from the URDF file
+
+2 - Solve the inverse kinematics problem by:
+- Decouple the IK problem into inverse position and inverse orientation problems
+- Solve the inverse position problem first using the geometrical approach
+- Solve the inverse oreintation problem second using a similar geometrical approach given the inverse position solution obtained in the previous step
 
 ## Kinematic Analysis
+### DH Frames Assignment 
+The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. 
+
+[image1]: ./misc_images/kuka_DH_diagram.png
+
+
+
+
+
+
+
+
+
+
+
+
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
 ### One time Gazebo setup step:
