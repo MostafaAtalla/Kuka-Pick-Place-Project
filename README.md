@@ -1,6 +1,6 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 # Robotic Pick and Place - Kuka KR210 Project
-### Description
+## Description
 This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
 
 In this project, a KuKa KR210 is simulated in Gazebo simulation environement is required pick a cylinderical item from shelves set in front of the robot and place it in a container beside it. This task invovles:
@@ -14,6 +14,7 @@ The main task required in this project is to correctly solve the forward and inv
 
 In this write up, a complete report about the project is presented with details about the kinematic analysis and the project implementation. 
 
+## Kinematic Analysis
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
 ### One time Gazebo setup step:
