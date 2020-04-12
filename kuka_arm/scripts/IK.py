@@ -4,6 +4,7 @@ It takes the pose parameters as an input, returns the corresponding joint values
 '''
 import tf
 from sympy import *
+from FK import forward_kinematics
 
 def inverse_kinematics(px,py,pz,roll,pitch,yaw,transforms):
     # Assemble a Rotation matrix corresponding to those euler angles   
@@ -15,7 +16,7 @@ def inverse_kinematics(px,py,pz,roll,pitch,yaw,transforms):
 
     R_gripper = T_gripper[:3,:3]
 
-    R_gripper_corrected = R_gripper * (Tdh_urdf[:3,:3].transpose()) 
+    R_gripper_corrected = R_gripper * (transforms[-1][:3,:3].transpose()) 
 
     ### Your IK code here
     # Calculate the wrist center position vector
@@ -53,3 +54,30 @@ def inverse_kinematics(px,py,pz,roll,pitch,yaw,transforms):
     theta6 = atan2(-R3_6[1,1], R3_6[1,0])
 
     return (theta1,theta2,theta3,theta4,theta5,theta6)
+
+
+
+def debug(quat,p):
+
+    # Initialize the symbolic variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') 
+
+    # Call forward kinematics function
+    transforms = forward_kinematics() 
+
+    # Calculate roll,pitch,yaw from quaternion
+    roll,pitch,yaw = tf.transformations.euler_from_quaternion(quat)
+    
+    # Call inverse kinematics function
+    theta = inverse_kinematics(roll,pitch,yaw,p[0],p[1],p[2],transforms)
+
+
+# Create quaternion
+quat = [0.69318, 0.26162, -0.35536, 0.56989]
+
+
+
+# Enter px,py,pz values
+p = [0.71957, -1.1655, 0.82443]
+
+debug (quat,p)
