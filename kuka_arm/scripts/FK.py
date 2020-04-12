@@ -1,5 +1,5 @@
 '''
-This function calculates the forward kinematics symbolic solution for the
+This function is meant to test the forward kinematics solution for the
 kuka k210. It returns a list of symbolic transformations from each frame 
 to the subsquent one.
 
@@ -23,6 +23,8 @@ for more information about the debug function inputs please refer to the functio
 its call section
  
 '''
+import rospy
+from mpmath import *
 from sympy import *
 import tf
 import numpy as np
@@ -41,7 +43,7 @@ def forward_kinematics():
                        [0, -1,   0,  0],
                        [1,  0,   0,  0],
                        [0,  0,   0,  1]])
-
+    
     num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
     
     transforms = []    #transforms list to accumulate the transforms from each joint to the following one.
@@ -70,9 +72,6 @@ def forward_kinematics():
 def debug(q,t,quat):
 
     ######## Calculate Pose Using Function Herein ############
-    # Initialize the symbolic variables
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') 
-
     # Call forward kinematics function
     transforms = forward_kinematics()
             
@@ -114,20 +113,24 @@ def debug(q,t,quat):
 
 
     ######## Calculating and Printing Pose Error ############
-    pprint(T0_gripper_actual-T0_gripper)
+    pprint(T0_gripper)
 
 '''
 # To use the debugging function to test the forward kinematics function
 # uncomment this test section and enter the q, t and quat values
+
+# Initialize the symbolic variables
+q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8') 
+
 # Debugging Function Inputs
-q = [-2.91,-0.78,0.25,5.19,0.36,3.57]         # list of joint values in radians
+#q = [3.0395643766602376, 0.26147315486371686, 0.5204210284793002,-1.8442338346018146, 1.468748274304302, 1.672597034660533]         # list of joint values in radians
+q = [-0.1,-0.7,-3.07,-1.83,-1.43,4.67]
+t = [1.0437, -2.5814, 0.67852]               # list of translation vector entries of the gripper URDF frame w.r.t base (obtained from RVIZ)
 
-t = [-1.0606, -0.15275, 2.4486]               # list of translation vector entries of the gripper URDF frame w.r.t base (obtained from RVIZ)
-
-quat =  [0.094633, 0.94858, 0.264, -0.14678]  # list of quaternion values of the gripper URDF frame w.r.t base (obtained from RVIZ)
+quat =  [0.51955, -0.11157, 0.41976, 0.73581]  # list of quaternion values of the gripper URDF frame w.r.t base (obtained from RVIZ)
 
 debug(q,t,quat)
-'''
 
+'''
 
 
