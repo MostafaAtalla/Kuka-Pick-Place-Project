@@ -2,7 +2,7 @@
 
 [//]: # (Image References)
 [image1]: ./misc_images/kuka_DH_diagram.png
-[image1]: ./misc_images/DH-frames2.jpg
+[image2]: ./misc_images/DH-frames2.jpg
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
