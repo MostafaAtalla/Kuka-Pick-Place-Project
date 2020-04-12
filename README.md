@@ -2,6 +2,7 @@
 
 [//]: # (Image References)
 [image1]: ./misc_images/kuka_DH_diagram.png
+[image1]: ./misc_images/DH-frames2.jpg
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -39,7 +40,7 @@ It is worth noting that the final girpper DH frame does not necessarily coincide
 
 
 ![alt text][image1]
-
+![alt text][image2]
 Using the constructed DH frames, the DH parameters table below is obtained.
 
 Links | alpha(i-1) | a(i-1) | d(i) | theta(i)
