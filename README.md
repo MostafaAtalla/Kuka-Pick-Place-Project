@@ -1,5 +1,11 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
-# Robotic arm - Pick & Place project
+# Robotic Pick and Place - Kuka KR210 Project
+### Description
+This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
+
+In this project, a KuKa KR210 is simulated in Gazebo simulation environement to accomplish this task with shelves set in front of the robot and a container beside it. The main task required in this project is to correctly solve the forward and inverse kinematics problems of the arm and code it up in an IK ROS service. This service works in a request-response basis where other nodes might request the inverse kinematics solution for a specific trajectory points and the service will respond with the IK solution accordingly. 
+
+In this write up, a complete report about the project is presented with details about the kinematic analysis and the project implementation. 
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
