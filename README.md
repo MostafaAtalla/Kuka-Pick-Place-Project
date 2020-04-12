@@ -38,12 +38,19 @@ The picture below illustrates the DH frames assignment used to solve the FK prob
 It is worth noting that the final girpper DH frame does not necessarily coincide with the gripper URDF frame ( which is the case here). In this case, a transformation is needed between both frames to make sure that the pose calculations is accurate. In the picture below, the red colored frames correspond to the DH frames and the yellow ones correspond to the URDF frames (Notice the orientation difference in the gripper frames between both of them).
 
 
-
-
 ![alt text][image1]
 
+Using the constructed DH frames, the DH parameters table below is obtained.
 
-
+Links | alpha(i-1) | a(i-1) | d(i) | theta(i)
+--- | --- | --- | --- | ---
+0->1 | 0 | 0 | d1 | q1
+1->2 | - pi/2 | a2 | 0 | q2-pi/2
+2->3 | 0 | a3 | 0 | q3
+3->4 |  -pi/2 | a4 | d4 | q4
+4->5 | pi/2 | 0 | 0 | q5
+5->6 | -pi/2 | 0 | 0 | q6
+6->g | 0 | 0 | dg | 0
 
 
 
