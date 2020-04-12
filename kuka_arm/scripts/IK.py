@@ -2,6 +2,8 @@
 This function calculates the inverse kinematics solution for the kuka K210
 It takes the pose parameters as an input, returns the corresponding joint values as an output
 '''
+import tf
+from sympy import *
 
 def inverse_kinematics(px,py,pz,roll,pitch,yaw):
     # Assemble a Rotation matrix corresponding to those euler angles   
@@ -49,5 +51,5 @@ def inverse_kinematics(px,py,pz,roll,pitch,yaw):
     theta4 = atan2(R3_6[2,2], -R3_6[0,2])
     theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]), R3_6[1,2])
     theta6 = atan2(-R3_6[1,1], R3_6[1,0])
-    
+
     return (theta1,theta2,theta3,theta4,theta5,theta6)
