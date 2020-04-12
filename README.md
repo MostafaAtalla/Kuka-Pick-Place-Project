@@ -35,7 +35,7 @@ The picture below illustrates the DH frames assignment used to solve the FK prob
 - For the first frame, make Z1 identical to Z0
 - For the gripper frame assign Z and X similar to Z6 and X6 respectively
 
-It is worth noting that the final girpper DH frame does not necessarly coincide with the gripper URDF frame ( which is the case here). In this case, a transformation is needed between both frames to make sure that the pose calculations is accurate.
+It is worth noting that the final girpper DH frame does not necessarily coincide with the gripper URDF frame ( which is the case here). In this case, a transformation is needed between both frames to make sure that the pose calculations is accurate. In the picture below, the red colored frames correspond to the DH frames and the yellow ones correspond to the URDF frames (Notice the orientation difference in the gripper frames between both of them).
 
 
 
