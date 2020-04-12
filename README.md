@@ -3,6 +3,8 @@
 [//]: # (Image References)
 [image1]: ./misc_images/kuka_DH_diagram.png
 [image2]: ./misc_images/DH-frames2.jpg
+[image3]: ./misc_images/FK1.png
+[image4]: ./misc_images/FK2.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -41,6 +43,7 @@ It is worth noting that the final girpper DH frame does not necessarily coincide
 
 ![alt text][image1]
 
+### DH Parameters
 Using the constructed DH frames, the DH parameters table below is obtained.
 
 Links | alpha(i-1) | a(i-1) | d(i) | theta(i)
@@ -64,7 +67,11 @@ For better understanding of what those parameters are on the physical robot, ple
 
 ![alt text][image2]
 
+### FK Transformation Matrices 
+The deduced DH parameters above are used to calculate the transformation matrices between each frame and the subsequent one from the base frame to the gripper frame. Each row of the DH table represents the parameters required to build the transformation between each pair of frames (for example row 1 represents the parameters required to build the transformations between frame 1 and frame 2). To build each transformation, the 4 DH parameters are plugged into the following sequence of transformations to obtained the matrix shown below. 
 
+![alt text][image3]
+![alt text][image4]
 
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
