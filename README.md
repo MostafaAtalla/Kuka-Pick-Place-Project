@@ -1,7 +1,5 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
-[//]: # (Image References)
-[image1]: ./misc_images/kuka_DH_diagram.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -29,6 +27,9 @@ In this write up, a complete report about the project is presented with details 
 ## Kinematic Analysis
 ### DH Frames Assignment 
 The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. 
+
+[//]: # (Image References)
+[image1]: ./misc_images/kuka_DH_diagram.png
 
 [alt text][image1]
 
