@@ -31,7 +31,7 @@ The picture below illustrates the DH frames assignment used to solve the FK prob
 [//]: # (Image References)
 [image1]: ./misc_images/kuka_DH_diagram.png
 
-[alt text][image1]
+![alt text][image1]
 
 
 
