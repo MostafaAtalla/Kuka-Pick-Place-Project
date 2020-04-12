@@ -1,5 +1,9 @@
 '''
-This function takes the following inputs:
+This function calculates the forward kinematics symbolic solution for the
+kuka k210. It returns a list of symbolic transformations from each frame 
+to the subsquent one.
+
+Dh Parameters Table is already defined within the function
 DH table dictionary containing the following key-values pairs:
 Key: 'a'     (link length)   - Value: list of link lengths
 Key: 'alpha' (link twist)    - Value: list of link twist angles in radians
@@ -23,8 +27,21 @@ from sympy import *
 import tf
 import numpy as np
 
-def forward_kinematics(DH):
+def forward_kinematics():
     # Initialization
+    # Initialize the symbolic variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
+    # Create Modified DH parameters dictionary
+    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
+              'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
+              'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
+              'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
+    # Define the correction transformation between the gripper DH frame and gripper URDF frame
+    Tdh_urdf = Matrix([[0,  0,   1,  0],
+                       [0, -1,   0,  0],
+                       [1,  0,   0,  0],
+                       [0,  0,   0,  1]])
+
     num_of_transforms = len(DH['a'])    # Number of transforms from the base frame to the DH gripper frame
     
     transforms = []    #transforms list to accumulate the transforms from each joint to the following one.
@@ -43,7 +60,8 @@ def forward_kinematics(DH):
                                 [sin(q) * sin(alpha), cos(q) * sin(alpha), cos(alpha), cos(alpha) * d],
                                 [0, 0, 0, 1]]))
 
-   
+    transforms.append(Tdh_urdf)
+
     return transforms
    
 
@@ -52,27 +70,9 @@ def forward_kinematics(DH):
 def debug(q,t,quat):
 
     ######## Calculate Pose Using Function Herein ############
-    # Create Symbolic Variables
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')       
-    # Create Modified DH parameters dictionary
-    DH = {'alpha': [0, -pi / 2, 0, -pi / 2, pi / 2, -pi / 2, 0],
-                'a': [0, 0.35, 1.25, -0.054, 0, 0, 0],
-                'd': [0.75, 0, 0, 1.5, 0, 0, 0.303],
-                'q': [q1, q2 - pi / 2, q3, q4, q5, q6,0]}
-    # Define the correction transformation between the gripper DH frame and gripper URDF frame
-    # Create the gripper frame correction matrix to align the DH frames with the URDF Frames
-    # The rotation matrix of this transformations is the unit vectors of the URDF gripper frame
-    # With respect to the DH gripper frame. The translation component is zero
-    Tdh_urdf = Matrix([[0,  0,   1,  0],
-                        [0, -1,   0,  0],
-                        [1,  0,   0,  0],
-                        [0,  0,   0,  1]])
-
     # Call forward kinematics function
-    transforms = forward_kinematics(DH)
-    # Append the transformation matrix between the DH gripper frame and the URDF gripper frame
-    transforms.append(Tdh_urdf)
-        
+    transforms = forward_kinematics()
+            
     # Create the total transforms from each frame to the base frame
     T0_gripper = transforms[0]   # Transformation matrix from the URDF gripper frame to the base frame
         
