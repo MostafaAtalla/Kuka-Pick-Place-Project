@@ -3,7 +3,14 @@
 ### Description
 This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
 
-In this project, a KuKa KR210 is simulated in Gazebo simulation environement to accomplish this task with shelves set in front of the robot and a container beside it. The main task required in this project is to correctly solve the forward and inverse kinematics problems of the arm and code it up in an IK ROS service. This service works in a request-response basis where other nodes might request the inverse kinematics solution for a specific trajectory points and the service will respond with the IK solution accordingly. 
+In this project, a KuKa KR210 is simulated in Gazebo simulation environement is required pick a cylinderical item from shelves set in front of the robot and place it in a container beside it. This task invovles:
+- Identifying the item location
+- Plan a path to approach the item and a path to place in the container
+- Solve the IK problem for the path points to obtain the corresponding joint angles
+- Create feasible trajectories for each join to follow the cartesian path
+- Follow those trajectories using an appropriate controller
+
+The main task required in this project is to correctly solve the forward and inverse kinematics problems of the arm and code it up in an IK ROS service. This service works in a request-response basis where other nodes might request the inverse kinematics solution for a specific trajectory points and the service will respond with the IK solution accordingly. 
 
 In this write up, a complete report about the project is presented with details about the kinematic analysis and the project implementation. 
 
