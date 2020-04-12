@@ -1,4 +1,8 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
+
+[//]: # (Image References)
+[image1]: ./misc_images/kuka_DH_diagram.png
+
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
 This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
@@ -26,8 +30,7 @@ In this write up, a complete report about the project is presented with details 
 ### DH Frames Assignment 
 The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. 
 
-[image1]: ./misc_images/kuka_DH_diagram.png
-
+[alt text][image1]
 
 
 
