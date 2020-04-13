@@ -4,13 +4,16 @@
 [image1]: ./misc_images/kuka_DH_diagram.png
 [image2]: ./misc_images/DH-frames2.jpg
 [image3]: ./misc_images/FK1.png
-[image5]: ./misc_images/FK2.png
-[image6]: ./misc_images/FK2.png
-[image7]: ./misc_images/FK2.png
-[image8]: ./misc_images/FK2.png
-[image9]: ./misc_images/FK2.png
-[image10]: ./misc_images/FK2.png
-[image11]: ./misc_images/FK2.png
+[image4]: ./misc_images/FK2.png
+[image5]: ./misc_images/correction.png
+[image6]: ./misc_images/wristcenter.png
+[image7]: ./misc_images/wirst center 2.png
+[image8]: ./misc_images/IK1.png
+[image9]: ./misc_images/inverseorientation.png
+[image10]: ./misc_images/beta.png
+[image11]: ./misc_images/alpha.png
+[image12]: ./misc_images/gamma.png
+
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
 This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
