@@ -102,6 +102,7 @@ The terms used in thos equation are as follows:
 - The last vector is the Z vector which will be rotated to correspond to the direction of the vector from the wrist center to the end effector frame
 
 The following picture shows the geometric interpretation of the vector subtration operation done in the previous step.
+
 ![alt text][image7]
 
 After successfully finding the wrist center postion, the inverse postion problem can be solved by dudcing each joint angle using a geometric approach. The derivation of each joint angle is illustrated in the image below.
