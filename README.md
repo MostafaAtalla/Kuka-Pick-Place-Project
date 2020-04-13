@@ -6,8 +6,8 @@
 [image3]: ./misc_images/FK1.png
 [image4]: ./misc_images/FK2.png
 [image5]: ./misc_images/correction.png
-[image6]: ./misc_images/wristcenter.png
-[image7]: ./misc_images/wirstcenter2.png
+[image6]: ./misc_images/a.png
+[image7]: ./misc_images/b.png
 [image8]: ./misc_images/IK1.png
 [image9]: ./misc_images/inverseorientation.png
 [image10]: ./misc_images/eulerangles.png
