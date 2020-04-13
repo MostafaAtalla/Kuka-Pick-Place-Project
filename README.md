@@ -8,7 +8,7 @@
 [image5]: ./misc_images/correction.png
 [image6]: ./misc_images/a.png
 [image7]: ./misc_images/b.png
-[image8]: ./misc_images/IK1.png
+[image8]: ./misc_images/c.png
 [image9]: ./misc_images/inverseorientation.png
 [image10]: ./misc_images/eulerangles.png
 [image11]: ./misc_images/beta.png
