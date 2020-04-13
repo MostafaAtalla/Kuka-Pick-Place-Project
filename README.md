@@ -7,7 +7,7 @@
 [image4]: ./misc_images/FK2.png
 [image5]: ./misc_images/correction.png
 [image6]: ./misc_images/wristcenter.png
-[image7]: ./misc_images/wirst center 2.png
+[image7]: ./misc_images/wirstcenter2.png
 [image8]: ./misc_images/IK1.png
 [image9]: ./misc_images/inverseorientation.png
 [image10]: ./misc_images/beta.png
