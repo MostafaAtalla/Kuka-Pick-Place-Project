@@ -14,6 +14,11 @@
 [image11]: ./misc_images/beta.png
 [image12]: ./misc_images/alpha.png
 [image13]: ./misc_images/gamma.png
+[image14]: ./misc_images/projectimplement1.png
+[image15]: ./misc_images/projectimplement2.png
+[image16]: ./misc_images/projectimplement3.png
+[image17]: ./misc_images/projectimplement4.png
+[image18]: ./misc_images/projectimplement5.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -128,6 +133,45 @@ The three euler angles can be computing by matching the entries of both matrices
 ![alt text][image13]
 
 
+## Project Implementation
+### Forward Kinematics
+The forward kinematics is impelemnted within the IK_server.py within the handle function of the ROS service. Below are the steps taken to implement it:
+1- Define the DH paramters and the correction transformation matrix
+The Dh paramters table is defined as a dictionary with sting:list key-value pair. The keys are the DH paramters names while the values are lists that include the DH paramters of each row paramter in sequence until the gripper frame.
+
+The correction matrix is defined as a sympy matrix with the values derived earlier.
+
+[alt text][image14]
+
+2 - Calculate the frame transformations between each frame and the subsequent one.
+This is done by iterating through a for loop where in each loop the DH paramters are updated from the DH dictionary and plugged into the standard DH transformation matrix. Each matrix is then appended to a list called transforms where the transformation of each pair of frames will be stored.
+After the loop, the correction transformation is appended to the transforms list to complement the set of transformations.
+
+![alt text][image15]
+
+### Inverse Kinematics
+The inverse kinematics is impelemnted within the IK_server.py within the handle function of the ROS service. Below are the steps taken to implement it:
+1 - Assemble the end pose transformation matrix given the pose data obtained from the request message. This is done using the tf.transformations package and two numpy functions, namely, array and dot.The rotation matrix is sliced out of the total transformations matrix and corrected by post mulitplying with the correction rotation matrix between DH and urdf frames.
+
+![alt text][image16]
+
+2 - Calculate the inverse position solution
+This is done by first calculating the wrist position followed by implementing the math explained earlier.
+
+![alt text][image17]
+
+
+3 - Calculating the inverse orientation solution
+This is done by first calculating the symbolic R0_3 rotation matrix using the transforms computed earlier and substitute the inverse position solution obtained earlier. Afterwards, R3_g is computed by multiplying the inv(R0_3) by the corrected gripper rotation matrix. Then the math explained earlier to obtain the euler angles is implemented.
+
+![alt text][image18]
+
+## Successful Pick and Place Tasks Pictures:
+
+
+
+
+## Steps for Setting Up The Environment
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
 ### One time Gazebo setup step:
