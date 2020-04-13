@@ -4,8 +4,13 @@
 [image1]: ./misc_images/kuka_DH_diagram.png
 [image2]: ./misc_images/DH-frames2.jpg
 [image3]: ./misc_images/FK1.png
-[image4]: ./misc_images/FK2.png
-
+[image5]: ./misc_images/FK2.png
+[image6]: ./misc_images/FK2.png
+[image7]: ./misc_images/FK2.png
+[image8]: ./misc_images/FK2.png
+[image9]: ./misc_images/FK2.png
+[image10]: ./misc_images/FK2.png
+[image11]: ./misc_images/FK2.png
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
 This project simulates the amazon pick and place challenge where a robot is required to pick items from shelves and place them in a container. The challenge to to do this pick and place action correctly every time regardless of which shelf the item is on.
@@ -74,13 +79,48 @@ The deduced DH parameters above are used to calculate the transformation matrice
 ![alt text][image3]
 ![alt text][image4]
 
-
+### Correction Transformation
+One last transformation needed here is the transformation between the gripper DH frame and the gripper URDF frame. This transformation is needed to align both frames to make sure that the simulation pose we get from ROS is expressed in the correct frame. This transformation has only a rotation part while the translation part is zero since both of them share the same origin. The picture below shows the transformation deduced between the two frames with information about how construction of the transformation matrix.
+![alt text][image5]
 ### Inverse Kinematics
-Once we have our FK done, we are ready to start working on the inverse kinematics solution. 
+Once we have our FK done, we are ready to start working on the inverse kinematics solution. The inverse kinematics solution as discussed earlier can be splitted into two sub-problems: 1) Inverse position that includes the first three joint values (theta1, theta2, theta3) 2) Inverse orientation that involves the last three joint values (theta4, theta5 , theta6). This problem simplification is possible because of the robot design that has a spherical wrist where the last three joints axes intersect in only one point. For more information about that the interested reader is referred to: 
+https://robotacademy.net.au/lesson/different-approach-to-solving-inverse-kinematics/ 
 
+### Inverse Postion 
+To solve the inverse postion problem, first we need to obtain the spherical wrist postion vector. This can be done through a simple vector subtraction operation illustrated in the picutre below.
 
+![alt text][image6]
 
+The terms used in thos equation are as follows:
+- W vector is the position vector of the wrist center
+- P vector is the position vector of the gripper frame
+- R is the corrected rotation matrix of the gripper frame (rotation of the end effector frame after being corrected from the urdf frame to the dh frame)
+- d is the DH paramters that represents the euclidean distance between the wrist center and the end effector frame
+- The last vector is the Z vector which will be rotated to correspond to the direction of the vector from the wrist center to the end effector frame
 
+The following picture shows the geometric interpretation of the vector subtration operation done in the previous step.
+![alt text][image7]
+
+After successfully finding the wrist center postion, the inverse postion problem can be solved by dudcing each joint angle using a geometric approach. The derivation of each joint angle is illustrated in the image below.
+
+![alt text][image8]
+
+### Inverse Orientation
+The first step to solve the inverse oreintation problem is to calculate the rotation matrix from the wrist center to the end effector. This can be done as follows:
+- Calculate R0_3: the rotation matrix from base frame to the wrist center
+- Subsititute the inverse position values obtained earlier (theta1, theta2 ,theta3) to obtain the numric R0_3 
+- Calculate R3_g: the rotation matrix from wrist center to end effetor frame. This can be done through the operation illustrated in the picture below where R0_6 corresponds to R0_g 
+
+![alt text][image9]
+
+After that, the 3 last joint angles can be treated as a combination of euler angles since their axes of riotation intersect in the same point. To obtain this combination of euler angles, we can use the matrix formula for the euler angles rotation (based on the convetion we select) and try to match the entries of this formula with the numeric matrix R3_g computed earlier. The convention used in this project is the XYZ extrinsic rotations shown in the picutre below.
+
+![alt text][image10]
+
+The three euler angles can be computing by matching the entries of both matrices as follows:
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
 
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
