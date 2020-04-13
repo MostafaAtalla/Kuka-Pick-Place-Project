@@ -30,6 +30,7 @@ In this write up, a complete report about the project is presented with details 
 - Solve the inverse oreintation problem second using a similar geometrical approach given the inverse position solution obtained in the previous step
 
 ## Kinematic Analysis
+### Forward Kinematics
 ### DH Frames Assignment 
 The picture below illustrates the DH frames assignment used to solve the FK problem of the arm. The general procedure for asigning frames is to:
 - Assign Z axes to the joints's axis of rotation
@@ -72,6 +73,14 @@ The deduced DH parameters above are used to calculate the transformation matrice
 
 ![alt text][image3]
 ![alt text][image4]
+
+
+### Inverse Kinematics
+Once we have our FK done, we are ready to start working on the inverse kinematics solution. 
+
+
+
+
 
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
