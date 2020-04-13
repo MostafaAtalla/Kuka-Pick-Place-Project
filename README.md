@@ -19,6 +19,11 @@
 [image16]: ./misc_images/projectimplement3.png
 [image17]: ./misc_images/projectimplement4.png
 [image18]: ./misc_images/projectimplement5.png
+[image19]: ./misc_images/1.png
+[image20]: ./misc_images/2.png
+[image21]: ./misc_images/3.png
+[image22]: ./misc_images/4.png
+[image23]: ./misc_images/5.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
@@ -166,8 +171,12 @@ This is done by first calculating the symbolic R0_3 rotation matrix using the tr
 
 ![alt text][image18]
 
-## Successful Pick and Place Tasks Pictures:
-
+## Successful Pick and Place Task Demonstration
+![alt text][image19]
+![alt text][image20]
+![alt text][image21]
+![alt text][image22]
+![alt text][image23]
 
 
 
