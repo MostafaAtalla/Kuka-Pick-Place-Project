@@ -8,7 +8,7 @@
 [image5]: ./misc_images/correction.png
 [image6]: ./misc_images/a.png
 [image7]: ./misc_images/b.png
-[image8]: ./misc_images/c.png
+[image8]: ./misc_images/c.jpg
 [image9]: ./misc_images/inverseorientation.png
 [image10]: ./misc_images/eulerangles.png
 [image11]: ./misc_images/beta.png
@@ -118,8 +118,7 @@ The following picture shows the geometric interpretation of the vector subtratio
 
 After successfully finding the wrist center postion, the inverse postion problem can be solved by dudcing each joint angle using a geometric approach. The derivation of each joint angle is illustrated in the image below.
 
-![ScreenShot](./misc_images/c.png | width=10)
-
+![alt text][image8]
 ### Inverse Orientation
 The first step to solve the inverse oreintation problem is to calculate the rotation matrix from the wrist center to the end effector. This can be done as follows:
 - Calculate R0_3: the rotation matrix from base frame to the wrist center
