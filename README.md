@@ -10,9 +10,10 @@
 [image7]: ./misc_images/wirstcenter2.png
 [image8]: ./misc_images/IK1.png
 [image9]: ./misc_images/inverseorientation.png
-[image10]: ./misc_images/beta.png
-[image11]: ./misc_images/alpha.png
-[image12]: ./misc_images/gamma.png
+[image10]: ./misc_images/eulerangles.png
+[image11]: ./misc_images/beta.png
+[image12]: ./misc_images/alpha.png
+[image13]: ./misc_images/gamma.png
 
 # Robotic Pick and Place - Kuka KR210 Project
 ## Description
