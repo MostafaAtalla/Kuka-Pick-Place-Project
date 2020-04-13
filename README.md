@@ -141,7 +141,7 @@ The Dh paramters table is defined as a dictionary with sting:list key-value pair
 
 The correction matrix is defined as a sympy matrix with the values derived earlier.
 
-[alt text][image14]
+![alt text][image14]
 
 2 - Calculate the frame transformations between each frame and the subsequent one.
 This is done by iterating through a for loop where in each loop the DH paramters are updated from the DH dictionary and plugged into the standard DH transformation matrix. Each matrix is then appended to a list called transforms where the transformation of each pair of frames will be stored.
